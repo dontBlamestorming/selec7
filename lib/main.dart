@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:card_swiper/card_swiper.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,6 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
       'Sub Banner',
       'Markets'
     ];
+    List<bool> _isSelects = List.generate(3, (index) => false);
+    print(_isSelects);
 
     return Scaffold(
         appBar: AppBar(
@@ -85,17 +88,44 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               height: 250.0,
               color: Colors.amber[600],
-              child: const Center(
-                child: Text("Main Banner"),
+              child: Swiper(
+                itemBuilder: (BuildContext context, int index) {
+                  return Image.network(
+                    "https://picsum.photos/250/150",
+                    fit: BoxFit.fill,
+                  );
+                },
+                itemCount: 3,
               ),
             ),
 
             // Taps
             Container(
               height: 50.0,
-              color: Colors.amber[500],
-              child: const Center(
-                child: Text("Taps"),
+              color: Colors.grey[200],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  ToggleButtons(
+                    children: const <Widget>[
+                      Text("메인"),
+                      Text("상품"),
+                      Text("즐겨찾기"),
+                    ],
+                    constraints: BoxConstraints(
+                      minWidth: (MediaQuery.of(context).size.width - 4) / 3,
+                      minHeight: (MediaQuery.of(context).size.height - 4),
+                    ),
+                    onPressed: (int index) {
+                      // Not working
+                      // setState(() {
+                      //   _isSelects[index] = !_isSelects[index];
+                      // });
+                    },
+                    isSelected: _isSelects,
+                    selectedColor: Colors.redAccent,
+                  )
+                ],
               ),
             ),
 
