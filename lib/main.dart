@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -340,11 +341,59 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             // Markets
-            Container(
-              height: 800.0,
-              color: Colors.amber[100],
-              child: const Center(
-                child: Text("Markets"),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, top: 30.0),
+              child: Column(
+                children: <Widget>[
+                  // title
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        // left
+                        Row(
+                          children: [
+                            Icon(Icons.access_alarm),
+                            Text("박양부띠끄"),
+                          ],
+                        ),
+
+                        // right
+                        Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.zoom_out_map_outlined),
+                              padding: EdgeInsets.all(3.0),
+                              constraints: BoxConstraints(),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.zoom_out_map_outlined),
+                              padding: EdgeInsets.all(3.0),
+                              constraints: BoxConstraints(),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.zoom_out_map_outlined),
+                              padding: EdgeInsets.all(3.0),
+                              constraints: BoxConstraints(),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // info of store
+                  Container(),
+
+                  // desc of store
+                  Container(),
+
+                  // product
+                  Container(),
+                ],
               ),
             ),
 
