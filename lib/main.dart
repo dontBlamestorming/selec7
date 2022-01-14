@@ -129,21 +129,162 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
 
-            // Buying Product
+            // Buying Product(title)
             Container(
-              height: 150.0,
+              height: 50.0,
+              padding: const EdgeInsets.only(
+                left: 15.0,
+                top: 15.0,
+                bottom: 15.0,
+              ),
               color: Colors.amber[400],
-              child: const Center(
-                child: Text("Buying Product"),
+              child: const Text("최근 구매상품"),
+            ),
+
+            // Buying Product(Card)
+            Container(
+              height: 110.0,
+              child: Swiper(
+                itemBuilder: (context, index) {
+                  return Container(
+                    child: Card(
+                      elevation: 2.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Container(
+                        width: 300.0,
+                        // height: 80.0,
+                        padding: EdgeInsets.all(10.0),
+                        child: Row(
+                          children: [
+                            Image.network(
+                              "https://picsum.photos/250/150",
+                              fit: BoxFit.fill,
+                            ),
+                            Column(
+                              children: const <Widget>[
+                                Text('Name'),
+                                Text('Description'),
+                                Text('Price'),
+                                Text('Recod'),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                itemCount: 3,
+                viewportFraction: 0.9,
+                scale: 1,
+                loop: false,
               ),
             ),
 
-            // Popular Product
+            // Popular Product(title)
             Container(
-              height: 800.0,
-              color: Colors.amber[300],
-              child: const Center(
-                child: Text("Popular Product"),
+              height: 50.0,
+              padding: const EdgeInsets.only(
+                left: 15.0,
+                top: 15.0,
+                bottom: 15.0,
+              ),
+              color: Colors.amber[400],
+              child: const Text("인기상품"),
+            ),
+
+            // Popular Product
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Image.network(
+                        "https://picsum.photos/250/150",
+                        fit: BoxFit.fill,
+                      ),
+                      flex: 1,
+                    ),
+                    Flexible(
+                      child: Column(
+                        children: const <Widget>[
+                          Text("Name"),
+                          Text("Title"),
+                          Text("Description"),
+                          Text("Price | Number of Sales"),
+                        ],
+                      ),
+                      flex: 3,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Image.network(
+                        "https://picsum.photos/250/150",
+                        fit: BoxFit.fill,
+                      ),
+                      flex: 1,
+                    ),
+                    Flexible(
+                      child: Column(
+                        children: const <Widget>[
+                          Text("Name"),
+                          Text("Title"),
+                          Text("Description"),
+                          Text("Price | Number of Sales"),
+                        ],
+                      ),
+                      flex: 3,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Image.network(
+                        "https://picsum.photos/250/150",
+                        fit: BoxFit.fill,
+                      ),
+                      flex: 1,
+                    ),
+                    Flexible(
+                      child: Column(
+                        children: const <Widget>[
+                          Text("Name"),
+                          Text("Title"),
+                          Text("Description"),
+                          Text("Price | Number of Sales"),
+                        ],
+                      ),
+                      flex: 3,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // Popular Product(Arrow)
+            ElevatedButton(
+              child: const Icon(Icons.arrow_circle_down),
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                padding: const EdgeInsets.all(5),
               ),
             ),
 
