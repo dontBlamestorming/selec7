@@ -153,12 +153,12 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+      backgroundColor: Colors.grey[200],
       body: ListView(
         children: <Widget>[
           // Main Banner
-          Container(
+          SizedBox(
             height: 285.0,
-            color: Colors.amber[500],
             child: FutureBuilder<Store>(
               future: store,
               builder: (context, snapshot) {
@@ -242,12 +242,21 @@ class _HomeState extends State<Home> {
                       );
                     },
                     itemCount: snapshot.data!.newItems!.length,
-                    // pagination: const SwiperPagination(),
-                    // control: const SwiperControl(),
+                    autoplay: true,
                   );
                 }
 
-                return const CircularProgressIndicator();
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const <Widget>[
+                        CircularProgressIndicator(),
+                      ],
+                    ),
+                  ],
+                );
               },
             ),
           ),
@@ -255,7 +264,6 @@ class _HomeState extends State<Home> {
           // Taps
           Container(
             height: 50.0,
-            color: Colors.grey[200],
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -277,6 +285,7 @@ class _HomeState extends State<Home> {
                   },
                   isSelected: _isSelects,
                   selectedColor: Colors.redAccent,
+                  renderBorder: false,
                 )
               ],
             ),
@@ -290,8 +299,15 @@ class _HomeState extends State<Home> {
               top: 15.0,
               bottom: 15.0,
             ),
-            color: Colors.amber[400],
-            child: const Text("최근 구매상품"),
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: Colors.grey[300]!,
+                  width: 1.0,
+                ),
+              ),
+            ),
+            child: const Text("방금 이거 샀어요!"),
           ),
 
           // Buying Product(Card)
@@ -344,8 +360,7 @@ class _HomeState extends State<Home> {
               top: 15.0,
               bottom: 15.0,
             ),
-            color: Colors.amber[400],
-            child: const Text("인기상품"),
+            child: const Text("요즘은 이게 인기"),
           ),
 
           // Popular Product
@@ -444,7 +459,6 @@ class _HomeState extends State<Home> {
           // Sub Banner
           Container(
             height: 200.0,
-            color: Colors.amber[600],
             child: Swiper(
               itemBuilder: (BuildContext context, int index) {
                 return Stack(
