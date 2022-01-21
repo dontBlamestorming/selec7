@@ -2,28 +2,28 @@ import 'package:flutter/material.dart';
 
 import 'package:card_swiper/card_swiper.dart';
 
+import 'package:selec7/controller/index.dart';
+import 'package:selec7/models/index.dart';
+
 class Home extends StatefulWidget {
-  const Home({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  late Future<Store> store;
+  final List<bool> _isSelects = List.generate(3, (index) => false);
+
+  @override
+  void initState() {
+    super.initState();
+    store = AppController().getData();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final List<String> entries = <String>[
-      'Banner',
-      'Taps',
-      'Buying Product',
-      'Popular Product',
-      'Sub Banner',
-      'Markets'
-    ];
-    List<bool> _isSelects = List.generate(3, (index) => false);
-    print(_isSelects);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -37,11 +37,11 @@ class _HomeState extends State<Home> {
                   "https://static2.selec7.com/img/seller_site_thum_img/logo.png",
                   width: 120.0,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 10.0),
                   child: Text(
-                    widget.title,
-                    style: const TextStyle(
+                    '셀렉트, 내 취향을 팝니다.',
+                    style: TextStyle(
                       fontSize: 10.0,
                       color: Colors.black,
                     ),
@@ -51,20 +51,6 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
-        // actions: <Widget>[
-        //   Padding(
-        //     padding: const EdgeInsets.only(right: 10.0),
-        //     child: IconButton(
-        //       onPressed: () {},
-        //       icon: const Icon(
-        //         Icons.menu,
-        //         color: Colors.black,
-        //       ),
-        //     ),
-        //   )
-        // ],
-        // backgroundColor: Colors.white,
-        // elevation: 0,
       ),
       endDrawer: Drawer(
         child: ListView(
@@ -171,16 +157,98 @@ class _HomeState extends State<Home> {
         children: <Widget>[
           // Main Banner
           Container(
-            height: 250.0,
-            color: Colors.amber[600],
-            child: Swiper(
-              itemBuilder: (BuildContext context, int index) {
-                return Image.network(
-                  "https://picsum.photos/250/150",
-                  fit: BoxFit.fill,
-                );
+            height: 285.0,
+            color: Colors.amber[500],
+            child: FutureBuilder<Store>(
+              future: store,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
+
+                if (snapshot.hasData) {
+                  return Swiper(
+                    itemBuilder: (BuildContext context, int index) {
+                      String imageLink =
+                          "https://img.selec7.com/${snapshot.data?.newItems?[index].siteGalleryRoot}/${snapshot.data?.newItems?[index].productImgInfo}";
+
+                      return Stack(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 285.0,
+                            width: 412.0,
+                            child: Image.network(
+                              imageLink,
+                              fit: BoxFit.fitWidth,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 285.0,
+                            width: 412.0,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 20.0, bottom: 20.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    height: 90.0,
+                                    width: 200.0,
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromRGBO(0, 0, 0, 0.5),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Text(
+                                            "${snapshot.data?.newItems?[index].siteName}",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14.0,
+                                            ),
+                                          ),
+                                          Text(
+                                            "${snapshot.data?.newItems?[index].title}",
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.bold),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          Text(
+                                            "${snapshot.data?.newItems?[index].subTitle}",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14.0,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                    itemCount: snapshot.data!.newItems!.length,
+                    // pagination: const SwiperPagination(),
+                    // control: const SwiperControl(),
+                  );
+                }
+
+                return const CircularProgressIndicator();
               },
-              itemCount: 3,
             ),
           ),
 
@@ -653,3 +721,16 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+  // body: FutureBuilder<Store>(
+  //   future: store,
+  //   builder: (context, snapshot) {
+  //     if (snapshot.hasData) {
+  //       return Text('${snapshot.data?.newItems?[1].price}');
+  //     } else if (snapshot.hasError) {
+  //       return Text("${snapshot.error}");
+  //     }
+
+  //     return CircularProgressIndicator();
+  //   },
+  // ),
