@@ -12,7 +12,7 @@ class _MenuTapsState extends State<MenuTaps> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 50.0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -28,15 +28,23 @@ class _MenuTapsState extends State<MenuTaps> {
               minHeight: (MediaQuery.of(context).size.height - 4),
             ),
             onPressed: (int index) {
-              // Not working
-              // setState(() {
-              //   _isSelects[index] = !_isSelects[index];
-              // });
+              setState(() {
+                for (int i = 0; i < _isSelects.length; i++) {
+                  _isSelects[i] = i == index;
+                }
+              });
             },
             isSelected: _isSelects,
-            selectedColor: Colors.redAccent,
+            selectedColor: Colors.black,
             renderBorder: false,
-          )
+          ),
+          // const TabBar(
+          //   tabs: [
+          //     Tab(
+          //       child: Text("메인"),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );
