@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:selec7/controller/index.dart';
 import 'package:selec7/models/index.dart';
 import 'package:selec7/widgets/footer.dart';
 
@@ -15,12 +14,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late Future<Store> store;
-
-  @override
-  void initState() {
-    super.initState();
-    store = AppController().getData();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -197,10 +190,11 @@ class _HomeState extends State<Home> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 55.0,
+                        // height: 55.0,
                         padding: const EdgeInsets.only(
                           left: 20.0,
                           top: 15.0,
+                          bottom: 10.0,
                         ),
                         decoration: BoxDecoration(
                           border: Border(
@@ -221,10 +215,10 @@ class _HomeState extends State<Home> {
                       const BuyProduct(),
                       // Popular Product(title)
                       Container(
-                        height: 55.0,
                         padding: const EdgeInsets.only(
                           left: 20.0,
                           top: 15.0,
+                          bottom: 10.0,
                         ),
                         child: const Text(
                           "요즘은 이게 인기",
