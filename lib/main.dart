@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:selec7/constants/index.dart';
+import 'package:selec7/controller/app_controller.dart';
 
-void main() => {runApp(const App())};
+void main() {
+  Get.put(AppController());
+  runApp(const App());
+}
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);

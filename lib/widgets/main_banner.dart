@@ -5,6 +5,8 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:selec7/controller/index.dart';
 import 'package:selec7/models/index.dart';
 
+import 'package:get/get.dart';
+
 class MainBanner extends StatefulWidget {
   const MainBanner({Key? key}) : super(key: key);
 
@@ -16,17 +18,13 @@ class _MainBannerState extends State<MainBanner> {
   late Future<Store> store;
 
   @override
-  void initState() {
-    super.initState();
-    store = AppController().getData();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    AppController controller = Get.find();
+
     return SizedBox(
       height: 285.0,
       child: FutureBuilder<Store>(
-        future: store,
+        future: controller.store,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Text("${snapshot.error}");
