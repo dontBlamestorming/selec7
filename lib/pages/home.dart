@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import 'package:selec7/models/index.dart';
+import 'package:selec7/controller/app_controller.dart';
+
 import 'package:selec7/widgets/footer.dart';
 
 import 'package:selec7/widgets/index.dart';
@@ -13,7 +15,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late Future<Store> store;
+  AppController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +185,7 @@ class _HomeState extends State<Home> {
             // const MenuTaps(),
 
             Container(
-              height: 1074,
+              height: 2074,
               child: TabBarView(
                 children: [
                   Column(
@@ -230,12 +232,29 @@ class _HomeState extends State<Home> {
                       ),
                       const PopularProduct(),
 
-                      ElevatedButton(
-                        child: const Icon(Icons.arrow_circle_down),
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          shape: const CircleBorder(),
-                          padding: const EdgeInsets.all(5),
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.grey,
+                                size: 18.0,
+                              ),
+                              onPressed: () {
+                                controller.isExpandedPopularList.value =
+                                    !controller.isExpandedPopularList.value;
+                              },
+                              style: ElevatedButton.styleFrom(
+                                shape: const CircleBorder(),
+                                padding: const EdgeInsets.all(5),
+                                primary: Colors.white,
+                                elevation: 1.0,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
 
