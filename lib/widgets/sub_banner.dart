@@ -18,9 +18,12 @@ class _SubBannerState extends State<SubBanner> {
         itemBuilder: (BuildContext context, int index) {
           return Stack(
             children: [
-              Image.network(
-                "https://static2.selec7.com/img/seller_site_thum_img/main-slide4.png",
-                fit: BoxFit.fill,
+              Container(
+                width: 500.0,
+                child: Image.network(
+                  "https://static2.selec7.com/img/seller_site_thum_img/main-slide4.png",
+                  fit: BoxFit.cover,
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

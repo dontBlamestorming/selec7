@@ -4,4 +4,10 @@ import 'package:selec7/api/index.dart';
 
 class AppController extends GetxController {
   late Future<Store> store = getData();
+  final isExpandedPopularList = false.obs;
+
+  // onPressedButton() {
+  //   isExpandedPopularList.value = !isExpandedPopularList.value;
+  //   update();
+  // }
 }

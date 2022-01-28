@@ -1,11 +1,13 @@
 import 'new_items.dart';
 import 'recent_sold_items.dart';
 import 'popular_items.dart';
+import 'markets.dart';
 
 class Store {
   List<NewItems>? newItems;
   List<RecentSoldItems>? recentSoldItems;
   List<PopularItems>? popularItems;
+  Markets? markets;
 
   Store({this.newItems, this.recentSoldItems, this.popularItems});
 
@@ -33,5 +35,9 @@ class Store {
         popularItems!.add(PopularItems.fromJson(value));
       });
     }
+
+    markets = json['resultFinal'] != null
+        ? Markets.fromJson(json['resultFinal'])
+        : null;
   }
 }
