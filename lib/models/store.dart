@@ -29,7 +29,7 @@ class Store {
     if (json['popularItems'] != null) {
       popularItems = <PopularItems>[];
 
-      json['recentSoldItems'].forEach((value) {
+      json['popularItems'].forEach((value) {
         popularItems!.add(PopularItems.fromJson(value));
       });
     }
