@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +16,88 @@ class PopularProduct extends StatefulWidget {
 class _PopularProductState extends State<PopularProduct> {
   AppController controller = Get.find();
 
+  Widget _popularProductCard(BuildContext context, product) {
+    String imageLink =
+        "https://img.selec7.com/${product.siteGalleryRoot}/${product.productImgInfo}";
+
+    return Card(
+      elevation: 1.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(
+          left: 14.0,
+          top: 8.0,
+          right: 14.0,
+          bottom: 8.0,
+        ),
+        child: Row(
+          children: [
+            Flexible(
+              child: ClipOval(
+                child: SizedBox.fromSize(
+                  size: const Size.fromRadius(30),
+                  child: ImageFiltered(
+                    imageFilter: ImageFilter.blur(sigmaX: 0.4, sigmaY: 0.4),
+                    child: Image.network(
+                      imageLink,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+              flex: 1,
+            ),
+            const SizedBox(
+              width: 15.0,
+            ),
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "${product.siteName}",
+                    style: const TextStyle(
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w300,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(
+                    "${product.title}",
+                    style: const TextStyle(
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w900,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(
+                    "${product.subTitle}",
+                    style: const TextStyle(
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w300,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Text(
+                    "${product.price} | 누적구매 ${product.soldCount}개",
+                    style: const TextStyle(
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.w300,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+              flex: 3,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Store>(
@@ -24,13 +108,23 @@ class _PopularProductState extends State<PopularProduct> {
         }
 
         if (snapshot.hasData) {
-          final items = snapshot.data!.popularItems!.toList();
+          List items = snapshot.data!.popularItems!.toList();
+
+          if (!controller.isExpandedPopularList.value) {
+            items = items.sublist(0, 5);
+          }
 
           return Padding(
             padding: const EdgeInsets.only(left: 20.0, right: 20.0),
             child: SingleChildScrollView(
-              child: ListBody(
-                children: items.map((i) => Text("${i.price}")).toList(),
+              child: Column(
+                children: [
+                  ListBody(
+                    children: items
+                        .map((item) => _popularProductCard(_, item))
+                        .toList(),
+                  ),
+                ],
               ),
             ),
           );
@@ -51,27 +145,3 @@ class _PopularProductState extends State<PopularProduct> {
     );
   }
 }
-// Card(
-//                   child: Row(
-//                     children: [
-//                       Flexible(
-//                         child: Image.network(
-//                           "https://picsum.photos/250/150",
-//                           fit: BoxFit.fill,
-//                         ),
-//                         flex: 1,
-//                       ),
-//                       Flexible(
-//                         child: Column(
-//                           children: const <Widget>[
-//                             Text("Name"),
-//                             Text("Title"),
-//                             Text("Description"),
-//                             Text("Price | Number of Sales"),
-//                           ],
-//                         ),
-//                         flex: 3,
-//                       ),
-//                     ],
-//                   ),
-//                 ),
