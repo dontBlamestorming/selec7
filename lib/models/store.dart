@@ -9,7 +9,7 @@ class Store {
   List<PopularItems>? popularItems;
   Markets? markets;
 
-  Store({this.newItems, this.recentSoldItems, this.popularItems});
+  Store({this.newItems, this.recentSoldItems, this.popularItems, this.markets});
 
   Store.fromJson(Map<String, dynamic> json) {
     if (json['newItems'] != null) {

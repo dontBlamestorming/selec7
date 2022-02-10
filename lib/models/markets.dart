@@ -1,11 +1,11 @@
 class Markets {
-  List<List>? marketList;
+  List<MarketList>? marketList;
 
   Markets({this.marketList});
 
   Markets.fromJson(Map<String, dynamic> json) {
     if (json['list'] != null) {
-      marketList = <List>[];
+      marketList = <MarketList>[];
 
       json['list'].forEach((value) {
         marketList!.add(MarketList.fromJson(value));
@@ -40,7 +40,7 @@ class MarketList {
   bool? showAdSlide;
   String? storeName;
   String? storeUrlName;
-  int? scoreBoardShareCountFormatted;
+  dynamic scoreBoardShareCountFormatted; // can int and string
   int? scoreBoardSaleCount;
   String? kakaoImgRoot;
   bool? scoreBoardSaleBool;
@@ -106,6 +106,7 @@ class MarketList {
 
     if (json['dtoList'] != null) {
       dtoList = <DtoList>[];
+
       json['dtoList'].forEach((v) {
         dtoList!.add(DtoList.fromJson(v));
       });
