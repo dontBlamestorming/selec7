@@ -155,37 +155,9 @@ class _HomeState extends State<Home> {
         body: ListView(
           children: <Widget>[
             const MainBanner(),
-
+            const MenuTaps(),
             Container(
-              height: 50.0,
-              child: const TabBar(
-                indicatorColor: Colors.black,
-                unselectedLabelStyle: TextStyle(
-                  fontSize: 16.0,
-                ),
-                labelStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-                tabs: [
-                  Text(
-                    "메인",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  Text(
-                    "상품검색",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  Text(
-                    "즐겨찾기",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ],
-              ),
-            ),
-            // const MenuTaps(),
-
-            Container(
-              height: 2074,
+              height: 4448,
               child: TabBarView(
                 children: [
                   Column(
@@ -263,9 +235,18 @@ class _HomeState extends State<Home> {
                       const Footer(),
                     ],
                   ),
-                  // Icon(Icons.directions_car),
-                  const Icon(Icons.directions_transit),
-                  const Icon(Icons.directions_bike),
+                  Container(
+                    color: Colors.blue,
+                    child: const Text(
+                      "Search Product View",
+                    ),
+                  ),
+                  Container(
+                    color: Colors.yellow,
+                    child: const Text(
+                      "즐겨찾기 View",
+                    ),
+                  ),
                 ],
               ),
             ),
