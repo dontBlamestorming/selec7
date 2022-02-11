@@ -18,85 +18,78 @@ class _MainBannerState extends State<MainBanner> {
   late Future<Store> store;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
     AppController controller = Get.find();
+    double screenWidth = MediaQuery.of(_).size.width;
+    double screenHeight = MediaQuery.of(_).size.height;
 
     return SizedBox(
-      height: 285.0,
+      width: screenWidth,
+      height: screenHeight * 0.417,
       child: FutureBuilder<Store>(
         future: controller.store,
-        builder: (context, snapshot) {
+        builder: (_, snapshot) {
           if (snapshot.hasError) {
             return Text("${snapshot.error}");
           }
 
           if (snapshot.hasData) {
             return Swiper(
-              itemBuilder: (BuildContext context, int index) {
+              itemBuilder: (BuildContext _, int index) {
                 String imageLink =
                     "https://img.selec7.com/${snapshot.data?.newItems?[index].siteGalleryRoot}/${snapshot.data?.newItems?[index].productImgInfo}";
 
                 return Stack(
                   children: <Widget>[
-                    SizedBox(
-                      height: 285.0,
-                      width: 412.0,
+                    SizedBox.expand(
                       child: Image.network(
                         imageLink,
-                        fit: BoxFit.fitWidth,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    SizedBox(
-                      height: 285.0,
-                      width: 412.0,
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.only(left: 20.0, bottom: 20.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 90.0,
-                              width: 200.0,
-                              decoration: BoxDecoration(
-                                color: const Color.fromRGBO(0, 0, 0, 0.5),
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
+                    Positioned(
+                      left: 20.0,
+                      bottom: 20.0,
+                      child: SizedBox(
+                        width: screenWidth,
+                        child: FractionallySizedBox(
+                          widthFactor: 0.7,
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(0, 0, 0, 0.5),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: DefaultTextStyle(
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16.0,
+                                ),
+                                overflow: TextOverflow.ellipsis,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
+                                  children: [
                                     Text(
                                       "${snapshot.data?.newItems?[index].siteName}",
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 14.0,
-                                      ),
                                     ),
                                     Text(
                                       "${snapshot.data?.newItems?[index].title}",
                                       style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold),
-                                      overflow: TextOverflow.ellipsis,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                     Text(
                                       "${snapshot.data?.newItems?[index].subTitle}",
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 14.0,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ],
                                 ),
                               ),
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
@@ -104,7 +97,7 @@ class _MainBannerState extends State<MainBanner> {
                 );
               },
               itemCount: snapshot.data!.newItems!.length,
-              autoplay: true,
+              autoplay: false,
             );
           }
 
