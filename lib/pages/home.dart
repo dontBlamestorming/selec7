@@ -156,102 +156,150 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             const MainBanner(),
             const MenuTaps(),
-            Container(
-              height: 4448,
-              child: TabBarView(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        // height: 55.0,
-                        padding: const EdgeInsets.only(
-                          left: 20.0,
-                          top: 15.0,
-                          bottom: 10.0,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            top: BorderSide(
-                              color: Colors.grey[300]!,
-                              width: 1.0,
-                            ),
-                          ),
-                        ),
-                        child: const Text(
-                          "방금 이거 샀어요!",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      const BuyProduct(),
-                      // Popular Product(title)
-                      Container(
-                        padding: const EdgeInsets.only(
-                          left: 20.0,
-                          top: 15.0,
-                          bottom: 10.0,
-                        ),
-                        child: const Text(
-                          "요즘은 이게 인기",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      const PopularProduct(),
-
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              child: const Icon(
-                                Icons.add,
-                                color: Colors.grey,
-                                size: 18.0,
-                              ),
-                              onPressed: () {
-                                controller.isExpandedPopularList.value =
-                                    !controller.isExpandedPopularList.value;
-                              },
-                              style: ElevatedButton.styleFrom(
-                                shape: const CircleBorder(),
-                                padding: const EdgeInsets.all(5),
-                                primary: Colors.white,
-                                elevation: 1.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      const SubBanner(),
-                      const MarketInfo(),
-                      const Footer(),
-                    ],
-                  ),
-                  Container(
-                    color: Colors.blue,
-                    child: const Text(
-                      "Search Product View",
+            TabBarView(
+              children: [
+                // Column(
+                //   children: const [
+                //     BuyProduct(),
+                //     // PopularProduct(),
+                //     // SizedBox(
+                //     //   height: 300.0,
+                //     //   child: SubBanner(),
+                //     // ),
+                //     // MarketInfo(),
+                //     Footer(),
+                //   ],
+                // ),
+                Container(
+                  height: 100.0,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 3,
+                      color: Colors.red,
                     ),
                   ),
-                  Container(
-                    color: Colors.yellow,
-                    child: const Text(
-                      "즐겨찾기 View",
-                    ),
+                  child: const Text(
+                    "Main View",
                   ),
-                ],
-              ),
+                ),
+                Container(
+                  height: 100.0,
+                  color: Colors.blue,
+                  child: const Text(
+                    "Search Product View",
+                  ),
+                ),
+                Container(
+                  height: 100.0,
+                  color: Colors.yellow,
+                  child: const Text(
+                    "즐겨찾기 View",
+                  ),
+                ),
+              ],
             ),
+
+            // ListView(
+            //   children: [
+            //     TabBarView(
+            //       children: [
+            //         // Column(
+            //         //   children: const [
+            //         //     BuyProduct(),
+            //         //     // PopularProduct(),
+            //         //     // SizedBox(
+            //         //     //   height: 300.0,
+            //         //     //   child: SubBanner(),
+            //         //     // ),
+            //         //     // MarketInfo(),
+            //         //     Footer(),
+            //         //   ],
+            //         // ),
+            //         Container(
+            //           height: 100.0,
+            //           decoration: BoxDecoration(
+            //             border: Border.all(
+            //               width: 3,
+            //               color: Colors.red,
+            //             ),
+            //           ),
+            //           child: const Text(
+            //             "Main View",
+            //           ),
+            //         ),
+            //         Container(
+            //           height: 100.0,
+            //           color: Colors.blue,
+            //           child: const Text(
+            //             "Search Product View",
+            //           ),
+            //         ),
+            //         Container(
+            //           height: 100.0,
+            //           color: Colors.yellow,
+            //           child: const Text(
+            //             "즐겨찾기 View",
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ],
+            // ),
           ],
         ),
+        // ListView(
+        //   shrinkWrap: true,
+        //   children: <Widget>[
+        //     const MainBanner(),
+        //     const MenuTaps(),
+        //     Container(
+        //       constraints: BoxConstraints(maxHeight: 1000.0),
+        //       child: TabBarView(
+        //         children: [
+        //           // Column(
+        //           //   children: const [
+        //           //     BuyProduct(),
+        //           //     // PopularProduct(),
+        //           //     // SizedBox(
+        //           //     //   height: 300.0,
+        //           //     //   child: SubBanner(),
+        //           //     // ),
+        //           //     // MarketInfo(),
+        //           //     Footer(),
+        //           //   ],
+        //           // ),
+        //           Container(
+        //             height: 100.0,
+        //             decoration: BoxDecoration(
+        //               border: Border.all(
+        //                 width: 3,
+        //                 color: Colors.red,
+        //               ),
+        //             ),
+        //             child: const Text(
+        //               "Main View",
+        //             ),
+        //           ),
+        //           Container(
+        //             height: 100.0,
+        //             color: Colors.blue,
+        //             child: const Text(
+        //               "Search Product View",
+        //             ),
+        //           ),
+        //           Container(
+        //             height: 100.0,
+        //             color: Colors.yellow,
+        //             child: const Text(
+        //               "즐겨찾기 View",
+        //             ),
+        //           ),
+        //         ],
+        //       ),
+        //     ),
+        //   ],
+        // ),
+
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           child: const Text("Login"),

@@ -114,19 +114,63 @@ class _PopularProductState extends State<PopularProduct> {
             items = items.sublist(0, 5);
           }
 
-          return Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  ListBody(
-                    children: items
-                        .map((item) => _popularProductCard(_, item))
-                        .toList(),
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.only(
+                  left: 20.0,
+                  top: 15.0,
+                  bottom: 10.0,
+                ),
+                child: const Text(
+                  "요즘은 이게 인기",
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
+                ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ListBody(
+                        children: items
+                            .map((item) => _popularProductCard(_, item))
+                            .toList(),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      child: const Icon(
+                        Icons.add,
+                        color: Colors.grey,
+                        size: 18.0,
+                      ),
+                      onPressed: () {
+                        controller.isExpandedPopularList.value =
+                            !controller.isExpandedPopularList.value;
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: const CircleBorder(),
+                        padding: const EdgeInsets.all(5),
+                        primary: Colors.white,
+                        elevation: 1.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           );
         }
 
